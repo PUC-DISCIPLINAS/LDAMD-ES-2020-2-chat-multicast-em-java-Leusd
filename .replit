@@ -1,2 +1,2 @@
 language = "java"
-run = "java Aplication"
+run = "javac *.java; java Aplication"
