@@ -11,6 +11,7 @@ public class Client {
         Scanner scan = new Scanner(System.in);
         String groupAddress;
         Server server = new Server();
+        boolean isInAGroup = false;
         try {
             int serverPort = 7896;
             s = new Socket("localhost", serverPort);
@@ -19,19 +20,27 @@ public class Client {
             DataOutputStream out = new DataOutputStream(s.getOutputStream());
             System.out.println("Digite seu nome: ");
             String name = scan.nextLine();
-            out.writeUTF("join/" + name);
-            groupAddress = in.readUTF();
-            server.joinGroup("------" + name + " join in group -------", groupAddress);
 
-            server.showMessages();
             while (true) {
                 String msg = scan.nextLine();
-                if (msg.equals("exit")) {
+                if (msg.equals("join")) {
+                    out.writeUTF("join/" + name);
+                    groupAddress = in.readUTF();
+                    server.joinGroup("------" + name + " join in group -------", groupAddress);
+                    isInAGroup = true;
+                    server.showMessages();
+                } else if (msg.equals("exit")) {
                     out.writeUTF("exit/" + name);
                     server.exitGroup("------" + name + " say goodbye -------");
-                }else {
+                    isInAGroup = false;
+                    server.showMessages();
+                } else if (isInAGroup){
                     server.sendMessage(name + ":\t" + msg);
+                    server.showMessages();
+                }else {
+                    System.out.println("You need to join in the group");
                 }
+
             }
 
         } catch (UnknownHostException e) {
