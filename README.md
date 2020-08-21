@@ -27,9 +27,9 @@ Os requisitos básicos são:
 
 
 ## Instruções de utilização
-1. Acessar diretório /bin
+1. Acessar diretório /out
 2. Executar ```java Server``` para inciar o servidor.
-2. Executar ```java Cliente```sempre que for iniciar um novo cliente.
+2. Executar ```java Client```sempre que for iniciar um novo cliente.
 2. O clinte deve enviar ```join``` para entrar no grupo
 2. O clinte deve enviar ```exit``` para entrar no grupo
 
