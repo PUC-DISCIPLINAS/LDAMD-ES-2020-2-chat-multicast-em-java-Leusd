@@ -6,7 +6,7 @@ import java.net.*;
 import java.util.Scanner;
 
 public class Client {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Socket s = null;
         Scanner scan = new Scanner(System.in);
         String groupAddress;
@@ -19,26 +19,20 @@ public class Client {
             DataOutputStream out = new DataOutputStream(s.getOutputStream());
             System.out.println("Digite seu nome: ");
             String name = scan.nextLine();
-            out.writeUTF("join," + name);
-            String data = in.readUTF();
-            groupAddress = data;
-            server.enterGroup("------" + name + " join in group -------", groupAddress);
+            out.writeUTF("join/" + name);
+            groupAddress = in.readUTF();
+            server.joinGroup("------" + name + " join in group -------", groupAddress);
 
             server.showMessages();
-            do {
+            while (true) {
                 String msg = scan.nextLine();
-                if (msg.equals("exit group")) {
-                    server.exitGroup();
+                if (msg.equals("exit")) {
                     out.writeUTF("exit/" + name);
+                    server.exitGroup("------" + name + " say goodbye -------");
+                }else {
+                    server.sendMessage(name + ":\t" + msg);
                 }
-                if (msg.equals("list group")) {
-                    server.listGroup();
-                    out.writeUTF("list/" + name);
-                } else {
-                    server.sendMessage("[ " + name + " ] " + msg);
-                }
-
-            } while (true);
+            }
 
         } catch (UnknownHostException e) {
             System.out.println("Socket:" + e.getMessage());
