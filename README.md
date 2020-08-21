@@ -17,7 +17,7 @@ Os requisitos básicos são:
 
 - [x] O cliente deve ser capaz de enviar mensagens para a sala.
 
-- [x]- O cliente deve ser capaz de sair da sala de bate papo.
+- [x] O cliente deve ser capaz de sair da sala de bate papo.
 
 ## Aluno
 * João Américo Martins Caiafa de Andrade
