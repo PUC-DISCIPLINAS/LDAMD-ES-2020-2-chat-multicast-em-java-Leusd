@@ -1,2 +1,2 @@
 language = "java"
-run = "javac -d bin src/*.java; java -cp bin redes.Main \"Teste\" 228.5.6.7"
+run = "javac -d out src/*.java; java -cp out Main"
